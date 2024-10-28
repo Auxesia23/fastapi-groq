@@ -52,9 +52,12 @@ async def groq_response(query : str):
             await asyncio.sleep(0.05)
 
 
+@app.get('/')
+async def index():
+    return "Hello World"
 
 
 @app.post('/chatbot')
-async def index(promt : Promt):  
+async def chatbot(promt : Promt):  
     return StreamingResponse(groq_response(promt.query), media_type="text/plain")
 
